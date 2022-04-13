@@ -58,26 +58,25 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
-      // menu text config
-      let menuConfig = {
-          fontFamily: 'Courier',
-          fontSize: '28px',
-          backgroundColor: '#000000', // title box color
-          color: '#EE6EAB', // title text color
-          align: 'right',
-          padding: {
-              top: 5,
-              bottom: 5,
-          },
-          fixedWidth: 0
-      }
+        var config = {
+          key: "titleAnimation",
+          frames: this.anims.generateFrameNumbers("title", {
+            start: 0,
+            end: 7,
+            first: 0
+          }),
+          frameRate: 7,
+          repeat: -1
+        };
 
-        // show menu text
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2, 'Use ←→ arrows to move & (F) to fire', menuConfig).setOrigin(0.5);
-        menuConfig.backgroundColor = '#00FF00'; // bottom box color
-        menuConfig.color = '#000'; // bottom text color
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
+        this.anims.create(config);
+        var bg = this.add.sprite(0, 0, "title").play("titleAnimation");
+        bg.setOrigin(0,0);
+
+        // define keys
+        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+      
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
