@@ -41,7 +41,7 @@ class Difficulty extends Phaser.Scene {
 
     update() {
         // switched difficulty arrows bc of design
-        if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
+        if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
         // EXPERT MODE <-
             game.settings = {
               spaceshipSpeed: 3,

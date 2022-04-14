@@ -73,7 +73,8 @@ class Play extends Phaser.Scene {
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
             this.scene.start("menuScene");
         }
-        this.bg.tilePositionX -= 4; // makes bg move or "scroll"
+        this.bg.tilePositionX -= 4; // makes bg move or "scroll" to the right
+
         if (!this.gameOver) {               
             this.p1Rocket.update();         // update rocket sprite
             this.ship01.update();           // update spaceships (x3)
