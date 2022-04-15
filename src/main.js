@@ -1,3 +1,7 @@
+// Grace Ho
+// game: "brainframe", built off Nathan Altice's "Rocket Patrol" tutorial
+// time spent: ~25 hours maybe
+
 let config = {
     type: Phaser.CANVAS,
     width: 923,

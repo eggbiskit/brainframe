@@ -16,9 +16,18 @@ class Menu extends Phaser.Scene {
           frameWidth: 923, 
           frameHeight: 773
         });
+        // NEW: BGM √
+        this.load.audio('bgm', 'assets/hardpassionlessstatic.ogg');
     }
 
     create() {
+        // bgm loop
+        // SRC: https://stackoverflow.com/questions/34210393/looping-audio-in-phaser
+        var music = this.sound.add('bgm');
+        music.setloop = true;
+        music.play();
+
+        // title ani
         var config = {
           key: "titleAnimation",
           frames: this.anims.generateFrameNumbers("title", {

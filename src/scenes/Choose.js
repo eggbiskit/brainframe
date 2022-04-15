@@ -10,10 +10,12 @@ class Choose extends Phaser.Scene {
         this.load.image('rawrxd', './assets/rawrxd.png');
         this.load.image('leappul', './assets/leappul.png');
         this.load.image('uwu', './assets/uwu.png');
+        
     }
 
     create() {
         // show cells
+
     }
 
     update() {
