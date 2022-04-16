@@ -1,6 +1,6 @@
 // Grace Ho
 // game: "brainframe", built off Nathan Altice's "Rocket Patrol" tutorial
-// time spent: ~25 hours maybe
+// time spent: ≥25 hours
 
 let config = {
     type: Phaser.CANVAS,
@@ -22,16 +22,16 @@ let borderPadding = borderUISize / 3;
   - player 1 uses keys A and D to move, F to fire
   - player 2 uses left and right arrows keys to move, up arrow key to fire
   - scores are on left and right sides for p1 and p2 respectively
-  - p1 chooses cell to play as first, then p2
 
 2. Redesign the game's artwork, UI, and sound to change 
    its theme/aesthetic (to something other than sci-fi) (60)
   - play as brain cells to shoot at negative thoughts
   - ui is on theme - new menu, new borders, new scene for difficulty
   - sound effects reflect mental anguish
-  - music is *chef's kiss*
+  - music is tbd
 
-3. 
+3. Display the time remaining (in seconds) on the screen (10)
+  -
 
-TOTAL: 30 + 60 + .. = ...
+TOTAL: 30 + 60 + 10
 */
