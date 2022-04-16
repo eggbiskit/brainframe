@@ -2,6 +2,12 @@
 class Play extends Phaser.Scene {
     constructor() {
         super("playScene");
+        this.p1s1 = false;
+        this.p1s2 = false;
+        this.p1s3 = false;
+        this.p2s1 = false;
+        this.p2s2 = false;
+        this.p2s3 = false;
     }
     preload() {
         // load images/tile sprites
@@ -116,6 +122,8 @@ class Play extends Phaser.Scene {
         }, null, this);
     }
 
+
+
     update() {
         // check key input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
@@ -133,34 +141,42 @@ class Play extends Phaser.Scene {
             this.ship01.update();           // update spaceships (x3)
             this.ship02.update();
             this.ship03.update();
-        } 
-        // NEW: ADD ROCKET COLLISION CHECK FOR ROCKET 2 √
+        }
+        // NEW: ADD ROCKET COLLISION CHECK FOR ROCKET 2
         // check collisions
         if(this.checkCollision(this.p1Rocket, this.ship03)) {
             this.p1Rocket.reset();
+            this.p1s3 = true;
             this.shipExplode(this.ship03);   
         }
-        if (this.checkCollision(this.p1Rocket, this.ship02)) {
+        else if (this.checkCollision(this.p1Rocket, this.ship02)) {
             this.p1Rocket.reset();
+            this.p1s2 = true;
             this.shipExplode(this.ship02);
         }
-        if (this.checkCollision(this.p1Rocket, this.ship01)) {
+        else if (this.checkCollision(this.p1Rocket, this.ship01)) {
             this.p1Rocket.reset();
+            this.p1s1 = true;
             this.shipExplode(this.ship01);
         }
         // NEW: p2 rocket checks
-        if(this.checkCollision(this.p2Rocket, this.ship03)) {
+        else if(this.checkCollision(this.p2Rocket, this.ship03)) {
             this.p2Rocket.reset();
+            this.p2s3 = true;
             this.shipExplode(this.ship03);   
         }
-        if (this.checkCollision(this.p2Rocket, this.ship02)) {
+        else if (this.checkCollision(this.p2Rocket, this.ship02)) {
             this.p2Rocket.reset();
+            this.p2s2 = true;
             this.shipExplode(this.ship02);
         }
-        if (this.checkCollision(this.p2Rocket, this.ship01)) {
+        else if (this.checkCollision(this.p2Rocket, this.ship01)) {
             this.p2Rocket.reset();
+            this.p2s1 = true;
             this.shipExplode(this.ship01);
         }
+
+ 
     }
 
     checkCollision(rocket, ship) {
@@ -187,32 +203,37 @@ class Play extends Phaser.Scene {
           boom.destroy();                       // remove explosion sprite
         });    
 
-        // need to check which rocket is hitting
-        if(this.checkCollision(this.p1Rocket, this.ship01)) {
+        // need to check which rocket hit which ship
+        if(this.p1s1) {
             this.p1Score += ship.points;
             this.scoreLeft.text = this.p1Score; 
         }
-        else if(this.checkCollision(this.p1Rocket, this.ship02)) {
+        else if(this.p1s2) {
             this.p1Score += ship.points;
             this.scoreLeft.text = this.p1Score;  
         }
-        else if(this.checkCollision(this.p1Rocket, this.ship03)) {
+        else if(this.p1s3) {
             this.p1Score += ship.points;
             this.scoreLeft.text = this.p1Score;  
         }
-        else if(this.checkCollision(this.p2Rocket, this.ship01)) {
+        else if(this.p2s1) {
             this.p2Score += ship.points;
             this.scoreLeft2.text = this.p2Score;  
         }
-        else if(this.checkCollision(this.p2Rocket, this.ship02)) {
+        else if(this.p2s2) {
             this.p2Score += ship.points;
             this.scoreLeft2.text = this.p2Score;  
         }
-        else if(this.checkCollision(this.p2Rocket, this.ship03)) {
+        else if(this.p2s3) {
             this.p2Score += ship.points;
             this.scoreLeft2.text = this.p2Score;  
         }
-
-        this.sound.play('sfx_explosion');  
+        this.p1s1 = false;
+        this.p1s2 = false;
+        this.p1s3 = false;
+        this.p2s1 = false;
+        this.p2s2 = false;
+        this.p2s3 = false;
+        this.sound.play('sfx_explosion');
     }
 }
