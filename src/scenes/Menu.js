@@ -6,7 +6,7 @@ class Menu extends Phaser.Scene {
     preload() {
         // load audio
         this.load.audio('sfx_select', 'assets/select.wav');
-        this.load.audio('sfx_explosion', 'assets/spaceship_exploding.wav');
+        this.load.audio('sfx_explosion', 'assets/scream.m4a');
         this.load.audio('sfx_rocket', 'assets/rocket_firing.wav');
         // load title png
         this.load.image('title_png', './assets/title.png');
@@ -23,9 +23,9 @@ class Menu extends Phaser.Scene {
     create() {
         // bgm loop
         // SRC: https://stackoverflow.com/questions/34210393/looping-audio-in-phaser
-        var music = this.sound.add('bgm');
-        music.setloop = true;
-        music.play();
+        // var music = this.sound.add('bgm');
+        // music.setloop = true;
+        // music.play();
 
         // title ani
         var config = {

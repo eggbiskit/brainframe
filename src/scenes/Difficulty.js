@@ -48,7 +48,7 @@ class Difficulty extends Phaser.Scene {
               gameTimer: 60000
             }
             this.sound.play('sfx_select');
-            this.scene.start('playScene');    
+            this.scene.start('tutorialScene');    
         }
         // N00B MODE ->
         if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
@@ -57,7 +57,7 @@ class Difficulty extends Phaser.Scene {
               gameTimer: 45000    
             }
             this.sound.play('sfx_select');
-            this.scene.start('playScene');
+            this.scene.start('tutorialScene');
         }
     }
 }

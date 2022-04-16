@@ -7,7 +7,7 @@ let config = {
     width: 923,
     height: 773,
     autoCenter: true, // SRC: https://phaser.discourse.group/t/center-game-on-my-website/5921
-    scene: [ Menu, Difficulty, Choose, Play ] // AAAHHH i forgot to add new scenes here
+    scene: [ Menu, Difficulty, Tutorial, Points, Choose, Play ] // AAAHHH i forgot to add new scenes here
 }
   
 let game = new Phaser.Game(config);
