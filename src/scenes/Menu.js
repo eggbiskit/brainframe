@@ -17,15 +17,15 @@ class Menu extends Phaser.Scene {
           frameHeight: 773
         });
         // NEW: BGM √
-        this.load.audio('bgm', 'assets/hardpassionlessstatic.ogg');
+        this.load.audio('bgm', 'assets/a_little_journey.mp3');
     }
 
     create() {
         // bgm loop
         // SRC: https://stackoverflow.com/questions/34210393/looping-audio-in-phaser
-        // var music = this.sound.add('bgm');
-        // music.setloop = true;
-        // music.play();
+        var music = this.sound.add('bgm');
+        music.setloop = true;
+        music.play();
 
         // title ani
         var config = {
@@ -50,24 +50,7 @@ class Menu extends Phaser.Scene {
       }
 
     update() {
-        // if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-        //   // easy mode
-        //   game.settings = {
-        //     spaceshipSpeed: 3,
-        //     gameTimer: 60000    
-        //   }
-        //   this.sound.play('sfx_select');
-        //   this.scene.start('playScene');     
-        // }
-        // if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
-        //   // hard mode
-        //   game.settings = {
-        //     spaceshipSpeed: 4,
-        //     gameTimer: 45000    
-        //   }
-        //   this.sound.play('sfx_select');
-        //   this.scene.start('playScene');
-        // }
+        // next scene
         if (Phaser.Input.Keyboard.JustDown(keyENTER)){
           this.sound.play('sfx_select');
           this.scene.start('diffScene');

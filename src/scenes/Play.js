@@ -28,7 +28,7 @@ class Play extends Phaser.Scene {
         this.load.image('topbar', './assets/topbar.png');
         this.load.image('bottombar', './assets/bottombar.png');
         // load spritesheet
-        this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        this.load.spritesheet('explosion', './assets/explosion_sheet.png', {frameWidth: 70, frameHeight: 39, startFrame: 0, endFrame: 9});
     }
 
     create() {
@@ -103,7 +103,7 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
 
-        // display scores
+        // display scores √
         // p1
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
         // p2
@@ -112,7 +112,7 @@ class Play extends Phaser.Scene {
         // NEW: UPDATE GAME OVER - MAKE SEP SCENE
         // GAME OVER flag
         this.gameOver = false;
-        // NEW: DISPLAY TIME REMAINING
+        // NEW: DISPLAY TIME REMAINING 
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
@@ -142,7 +142,7 @@ class Play extends Phaser.Scene {
             this.ship02.update();
             this.ship03.update();
         }
-        // NEW: ADD ROCKET COLLISION CHECK FOR ROCKET 2
+        // NEW: ADD ROCKET COLLISION CHECK FOR ROCKET 2 √
         // check collisions
         if(this.checkCollision(this.p1Rocket, this.ship03)) {
             this.p1Rocket.reset();
@@ -175,8 +175,6 @@ class Play extends Phaser.Scene {
             this.p2s1 = true;
             this.shipExplode(this.ship01);
         }
-
- 
     }
 
     checkCollision(rocket, ship) {
@@ -203,7 +201,7 @@ class Play extends Phaser.Scene {
           boom.destroy();                       // remove explosion sprite
         });    
 
-        // need to check which rocket hit which ship
+        // NEW: need to check which rocket hit which ship
         if(this.p1s1) {
             this.p1Score += ship.points;
             this.scoreLeft.text = this.p1Score; 

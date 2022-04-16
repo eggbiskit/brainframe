@@ -26,12 +26,12 @@ let borderPadding = borderUISize / 3;
 2. Redesign the game's artwork, UI, and sound to change 
    its theme/aesthetic (to something other than sci-fi) (60)
   - play as brain cells to shoot at negative thoughts
-  - ui is on theme - new menu, new borders, new scene for difficulty
+  - ui is on theme - new menu scenes, new borders, new scene for difficulty, new game over scene
   - sound effects reflect mental anguish
   - music is tbd
 
 3. Display the time remaining (in seconds) on the screen (10)
-  -
+  - 
 
 TOTAL: 30 + 60 + 10
 */
