@@ -29,8 +29,8 @@ let borderPadding = borderUISize / 3;
   - ui is on theme - new menu scenes, new borders, new scene for difficulty, new game over scene
   - sound effects + music match art style
 
-3. Display the time remaining (in seconds) on the screen (10)
+3. (unimplemented) Display the time remaining (in seconds) on the screen (10)
   - 
 
-TOTAL: 30 + 60 + 10 
+TOTAL: 30 + 60 
 */

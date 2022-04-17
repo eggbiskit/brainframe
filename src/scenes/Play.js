@@ -126,6 +126,7 @@ class Play extends Phaser.Scene {
     }
 
     update() {
+        this.p1Rocket.anims.play('internalscreamingAnimation');
         // check key input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
