@@ -11,15 +11,12 @@ class Play extends Phaser.Scene {
     }
     preload() {
         // load images/tile sprites
-        this.load.image('rocket', './assets/rocket.png');
-        this.load.image('rocket2', './assets/rocket.png');
-        this.load.image('spaceship', './assets/spaceship.png');
         this.load.image('bg', './assets/bg.png');
         // cells
         this.load.image('leappul', './assets/leappul.png');
-        this.load.image('internalscreaming', './assets/internalscreaming.png');
+        //this.load.image('internalscreaming', './assets/internalscreaming.png');
         this.load.image('rawrxd', './assets/rawrxd.png');
-        this.load.image('uwu', './assets/uwu.png');
+        //this.load.image('uwu', './assets/uwu.png');
         // enemies
         this.load.image('sadbat', './assets/sadbat.png');
         this.load.image('badappul', './assets/badappul.png');
@@ -29,9 +26,40 @@ class Play extends Phaser.Scene {
         this.load.image('bottombar', './assets/bottombar.png');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion_sheet.png', {frameWidth: 70, frameHeight: 39, startFrame: 0, endFrame: 9});
+        this.load.spritesheet('internalscreaming', './assets/internalscreaming_sheet.png', {frameWidth: 117, frameHeight: 100, startFrame: 0, endFrame: 1});
+        this.load.spritesheet('uwu', './assets/uwu_sheet.png', {frameWidth: 106, frameHeight: 103, startFrame: 0, endFrame: 1});
+
     }
 
     create() {
+        var config1 = {
+            key: "internalscreamingAnimation",
+            frames: this.anims.generateFrameNumbers("internalscreaming", {
+                start: 0,
+                end: 1,
+                first: 0
+            }),
+            frameRate: 6,
+            repeat: -1
+        };
+        var config2 = {
+            key: "uwuAnimation",
+            frames: this.anims.generateFrameNumbers("uwu", {
+                start: 0,
+                end: 1,
+                first: 0
+            }),
+            frameRate: 6,
+            repeat: -1
+        };
+
+        this.anims.create(config);
+        this.anims.create(config2);
+        var internal_var = this.add.sprite(0, 0, "internalscreaming").play("internalscreamingAnimation");
+        var uwu_var = this.add.sprite(0, 0, "uwu").play("uwuAnimation");
+        internal_var.play("internalscreamingAnimation");
+        uwu_var.play("uwuAnimation");
+        
         // NEW: CHANGE BG √
         this.bg = this.add.tileSprite(0, 0, 923, 773, 'bg').setOrigin(0, 0);
         // NEW: CHANGE BORDER LOOK √
@@ -47,7 +75,7 @@ class Play extends Phaser.Scene {
         // add rockets (p1, p2)
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'internalscreaming').setOrigin(3, 0.5);
         this.p2Rocket = new Rocket2(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'uwu').setOrigin(-1, 0.5);
-        // NEW: CHANGE SPACESHIP LOOK
+        // NEW: CHANGE SPACESHIP LOOK √
         // add spaceships (x3)
         this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'tauntme', 0, 30).setOrigin(0, 0);
         this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'badappul', 0, 20).setOrigin(0,0);
@@ -62,7 +90,7 @@ class Play extends Phaser.Scene {
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
 
-        // NEW: UPDATE EXPLOSION ANIMATION
+        // NEW: UPDATE EXPLOSION ANIMATION √
         // animation config
         this.anims.create({
             key: 'explode',
@@ -70,7 +98,7 @@ class Play extends Phaser.Scene {
             frameRate: 30
         });
 
-        // NEW: UPDATE AND SHOW SCORE FOR P2 
+        // NEW: UPDATE AND SHOW SCORE FOR P2 √
         // initialize score
         this.p1Score = 0;
         this.p2Score = 0;
@@ -93,7 +121,7 @@ class Play extends Phaser.Scene {
         let scoreConfig2 = {
             fontFamily: 'Courier',
             fontSize: '28px',
-            backgroundColor: '#aaaaaa',
+            backgroundColor: '#000000',
             color: '#FC66FF',
             align: 'left',
             padding: {
@@ -112,7 +140,8 @@ class Play extends Phaser.Scene {
         // NEW: UPDATE GAME OVER - MAKE SEP SCENE
         // GAME OVER flag
         this.gameOver = false;
-        // NEW: DISPLAY TIME REMAINING 
+        
+        // NEW: DISPLAY TIME REMAINING
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
@@ -121,8 +150,6 @@ class Play extends Phaser.Scene {
             this.gameOver = true;
         }, null, this);
     }
-
-
 
     update() {
         // check key input for restart

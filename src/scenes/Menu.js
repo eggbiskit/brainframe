@@ -6,10 +6,6 @@ class Menu extends Phaser.Scene {
     preload() {
         // load audio
         this.load.audio('sfx_select', 'assets/select.wav');
-        this.load.audio('sfx_explosion', 'assets/scream.m4a');
-        this.load.audio('sfx_rocket', 'assets/rocket_firing.wav');
-        // load title png
-        this.load.image('title_png', './assets/title.png');
         // load spritesheet 
         // TOOL: https://ezgif.com/gif-to-sprite
         this.load.spritesheet('title', './assets/title_sheet.png', {
