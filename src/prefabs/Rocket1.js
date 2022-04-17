@@ -7,13 +7,12 @@ class Rocket extends Phaser.GameObjects.Sprite {
       // add object to existing scene
       scene.add.existing(this);
       this.isFiring = false;
-      this.moveSpeed = 2;
+      this.moveSpeed = 3;
       this.sfxRocket = scene.sound.add('sfx_rocket'); // add rocket sfx
     }
 
     preload() {
         this.load.spritesheet('internalscreaming', './assets/internalscreaming_sheet.png', {frameWidth: 117, frameHeight: 100, startFrame: 0, endFrame: 1});
-
     }
 
     create() {
@@ -27,25 +26,13 @@ class Rocket extends Phaser.GameObjects.Sprite {
             frameRate: 6,
             repeat: -1
         };
-        this.anims.create(config);
-        // this.anims.create(config2);
-        var internal_var = this.add.sprite(0, 0, "internalscreaming").play("internalscreamingAnimation");
-        // var uwu_var = this.add.sprite(0, 0, "uwu").play("uwuAnimation");
-        internal_var.play("internalscreamingAnimation");
-        // uwu_var.play("uwuAnimation");
     }
 
     update() {
         if(!this.isFiring) { // NEW: A and D to move P1
-            // if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
-            //     this.x -= this.moveSpeed;
-            // } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
-            //     this.x += this.moveSpeed;
-            // }
-            if(keyA.isDown && this.x >= borderUISize + this.width) {
-               this.x -= this.moveSpeed;
+            if(keyA.isDown && this.x >= borderUISize + this.width) {                this.x -= this.moveSpeed;
             } else if (keyD.isDown && this.x <= game.config.width - borderUISize - this.width) {
-               this.x += this.moveSpeed;
+                this.x += this.moveSpeed;
             }
         }
 

@@ -9,6 +9,7 @@ class Play extends Phaser.Scene {
         this.p2s2 = false;
         this.p2s3 = false;
     }
+
     preload() {
         // load images/tile sprites
         this.load.image('bg', './assets/bg.png');
@@ -28,6 +29,7 @@ class Play extends Phaser.Scene {
         this.load.spritesheet('explosion', './assets/explosion_sheet.png', {frameWidth: 70, frameHeight: 39, startFrame: 0, endFrame: 9});
         this.load.spritesheet('internalscreaming', './assets/internalscreaming_sheet.png', {frameWidth: 117, frameHeight: 100, startFrame: 0, endFrame: 1});
         this.load.spritesheet('uwu', './assets/uwu_sheet.png', {frameWidth: 106, frameHeight: 103, startFrame: 0, endFrame: 1});
+        //this.load.spritesheet('gameover', './assets/game_over_sheet.png', {frameWidth: 685, frameHeight: 307, startFrame: 0, endFrame: 1});
     }
 
     create() {
@@ -46,7 +48,6 @@ class Play extends Phaser.Scene {
         // add rockets (p1, p2)
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'internalscreaming').setOrigin(3, 0.5);
         this.p2Rocket = new Rocket2(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'uwu').setOrigin(-1, 0.5);
-        this.p1Rocket.play('internalscreamingAnimation', true);
         // NEW: CHANGE SPACESHIP LOOK √
         // add spaceships (x3)
         this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'tauntme', 0, 30).setOrigin(0, 0);
@@ -70,6 +71,13 @@ class Play extends Phaser.Scene {
             frameRate: 30
         });
 
+        // let gmConfig = this.anims.create({
+        //     key: 'gm',
+        //     frames: this.anims.generateFrameNumbers('gameover', { start: 0, end: 1, first: 0}),
+        //     frameRate: 30
+        // });
+        // this.anims.create(gmConfig);
+
         // NEW: UPDATE AND SHOW SCORE FOR P2 √
         // initialize score
         this.p1Score = 0;
@@ -78,11 +86,11 @@ class Play extends Phaser.Scene {
         // display box
         // p1 
         let scoreConfig = {
-            fontFamily: 'Courier',
+            fontFamily: 'Comic Sans MS',
             fontSize: '28px',
             backgroundColor: '#000000',
             color: '#FC66FF',
-            align: 'right',
+            align: 'center',
             padding: {
             top: 5,
             bottom: 5,
@@ -91,11 +99,24 @@ class Play extends Phaser.Scene {
         }
         // p2
         let scoreConfig2 = {
-            fontFamily: 'Courier',
+            fontFamily: 'Comic Sans MS',
             fontSize: '28px',
             backgroundColor: '#000000',
-            color: '#FC66FF',
-            align: 'left',
+            color: '#F8A526',
+            align: 'center',
+            padding: {
+            top: 5,
+            bottom: 5,
+            },
+            fixedWidth: 100
+        }
+
+        let clockConfig = {
+            fontFamily: 'Courier',
+            fontSize: '100px',
+            backgroundColor: '#21FFFF',
+            color: '#FFFFFF',
+            align: 'center',
             padding: {
             top: 5,
             bottom: 5,
@@ -105,9 +126,9 @@ class Play extends Phaser.Scene {
 
         // display scores √
         // p1
-        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
+        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, "" + this.p1Score, scoreConfig);
         // p2
-        this.scoreLeft2 = this.add.text(borderUISize + borderPadding + 700, borderUISize + borderPadding*2, this.p2Score, scoreConfig2);
+        this.scoreLeft2 = this.add.text(borderUISize + borderPadding + 700, borderUISize + borderPadding*2, "" + this.p2Score, scoreConfig2);
         
         // NEW: UPDATE GAME OVER - MAKE SEP SCENE
         // GAME OVER flag
@@ -121,13 +142,16 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
-
-
+        // display time?
     }
 
-    update() {
-        this.p1Rocket.anims.play('internalscreamingAnimation');
+    update() {    
+        //this.p1Rocket.anims.play('internalscreamingAnimation');
         // check key input for restart
+        // if (this.gameOver) {
+        //     var gm = this.add.sprite(0, 0, "gameover").play("gm");
+        //     gm.setOrigin(0,0);
+        // }
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
         }
@@ -136,7 +160,7 @@ class Play extends Phaser.Scene {
         }
         this.bg.tilePositionX -= 4; // makes bg move or "scroll" to the right
 
-        if (!this.gameOver) {               
+        if (!this.gameOver) {      
             this.p1Rocket.update();         // update rocket sprite
             this.p2Rocket.update();         // update rocket sprite
 
