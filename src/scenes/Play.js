@@ -110,6 +110,19 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
         }
+        // game over
+        let gmConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#000000',
+            color: '#6666FF',
+            align: 'center',
+            padding: {
+            top: 5,
+            bottom: 5,
+            },
+            fixedWidth: 100
+        }
 
         let clockConfig = {
             fontFamily: 'Courier',
@@ -138,20 +151,15 @@ class Play extends Phaser.Scene {
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
-            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
-            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
+            this.scene.start("gmScene");
+            //this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', gmConfig).setOrigin(0.5);
+            //this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
         // display time?
     }
 
     update() {    
-        //this.p1Rocket.anims.play('internalscreamingAnimation');
-        // check key input for restart
-        // if (this.gameOver) {
-        //     var gm = this.add.sprite(0, 0, "gameover").play("gm");
-        //     gm.setOrigin(0,0);
-        // }
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
         }

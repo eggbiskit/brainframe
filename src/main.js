@@ -7,7 +7,7 @@ let config = {
     width: 923,
     height: 773,
     autoCenter: true, // SRC: https://phaser.discourse.group/t/center-game-on-my-website/5921
-    scene: [ Menu, Difficulty, Tutorial, Points, Play ] // AAAHHH i forgot to add new scenes here
+    scene: [ Menu, Difficulty, Tutorial, Points, Play, GameOver ] // AAAHHH i forgot to add new scenes here
 }
   
 let game = new Phaser.Game(config);
@@ -25,9 +25,9 @@ let borderPadding = borderUISize / 3;
 
 2. Redesign the game's artwork, UI, and sound to change 
    its theme/aesthetic (to something other than sci-fi) (60)
-  - play as brain cells to shoot at negative thoughts
-  - ui is on theme - new menu scenes, new borders, new scene for difficulty, new game over scene
-  - sound effects + music match art style
+  - play as brain cells to destroy negative thoughts
+  - ui is on theme - new menu scenes, new borders, new info scenes
+  - sound effects + music are cute n simple
 
 3. (unimplemented) Display the time remaining (in seconds) on the screen (10)
   - 
