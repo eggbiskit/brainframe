@@ -26,11 +26,12 @@ let borderPadding = borderUISize / 3;
 2. Redesign the game's artwork, UI, and sound to change 
    its theme/aesthetic (to something other than sci-fi) (60)
   - play as brain cells to destroy negative thoughts
-  - ui is on theme - new menu scenes, new borders, new info scenes
+  - ui is on theme - new menu scenes, new borders, new info scenes, new game over scene
   - sound effects + music are cute n simple
 
-3. (unimplemented) Display the time remaining (in seconds) on the screen (10)
-  - 
+3. Display the time remaining (in seconds) on the screen (10)
+  - time is in the middle of the screen
+  - 45 sec for expert, 60 sec for n00b
 
-TOTAL: 30 + 60 
+TOTAL: 30 + 60 + 10 = 100
 */

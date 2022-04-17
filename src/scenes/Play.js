@@ -14,9 +14,9 @@ class Play extends Phaser.Scene {
         // load images/tile sprites
         this.load.image('bg', './assets/bg.png');
         // cells
-        this.load.image('leappul', './assets/leappul.png');
+        //this.load.image('leappul', './assets/leappul.png');
         //this.load.image('internalscreaming', './assets/internalscreaming.png');
-        this.load.image('rawrxd', './assets/rawrxd.png');
+        //this.load.image('rawrxd', './assets/rawrxd.png');
         //this.load.image('uwu', './assets/uwu.png');
         // enemies
         this.load.image('sadbat', './assets/sadbat.png');
@@ -71,13 +71,6 @@ class Play extends Phaser.Scene {
             frameRate: 30
         });
 
-        // let gmConfig = this.anims.create({
-        //     key: 'gm',
-        //     frames: this.anims.generateFrameNumbers('gameover', { start: 0, end: 1, first: 0}),
-        //     frameRate: 30
-        // });
-        // this.anims.create(gmConfig);
-
         // NEW: UPDATE AND SHOW SCORE FOR P2 √
         // initialize score
         this.p1Score = 0;
@@ -110,25 +103,13 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
         }
-        // game over
-        let gmConfig = {
-            fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#000000',
-            color: '#6666FF',
-            align: 'center',
-            padding: {
-            top: 5,
-            bottom: 5,
-            },
-            fixedWidth: 100
-        }
 
+        // clock
         let clockConfig = {
-            fontFamily: 'Courier',
-            fontSize: '100px',
-            backgroundColor: '#21FFFF',
-            color: '#FFFFFF',
+            fontFamily: 'Comic Sans MS',
+            fontSize: '28px',
+            //backgroundColor: '#000000',
+            color: '#21FFFF',
             align: 'center',
             padding: {
             top: 5,
@@ -139,11 +120,10 @@ class Play extends Phaser.Scene {
 
         // display scores √
         // p1
-        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, "" + this.p1Score, scoreConfig);
+        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
         // p2
-        this.scoreLeft2 = this.add.text(borderUISize + borderPadding + 700, borderUISize + borderPadding*2, "" + this.p2Score, scoreConfig2);
+        this.scoreLeft2 = this.add.text(borderUISize + borderPadding + 700, borderUISize + borderPadding*2, this.p2Score, scoreConfig2);
         
-        // NEW: UPDATE GAME OVER - MAKE SEP SCENE
         // GAME OVER flag
         this.gameOver = false;
         
@@ -151,15 +131,27 @@ class Play extends Phaser.Scene {
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
+            // NEW: UPDATE GAME OVER - MAKE SEP SCENE √
             this.scene.start("gmScene");
-            //this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', gmConfig).setOrigin(0.5);
-            //this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
-        // display time?
+
+        this.timer = this.time.addEvent({ delay: game.settings.gameTimer });
+        this.remaining = this.timer.getRemaining();
+
+        // display time
+        // SRC: emeryplyler
+        scoreConfig.fixedWidth = 100;
+        this.timeShow = this.add.text(borderUISize + borderPadding + 350, borderUISize + borderPadding*2, this.clock + " secs left", clockConfig);
+        this.seconds = 0;
+        scoreConfig.fixedWidth = 0;
     }
 
-    update() {    
+    update() {  
+        // timer countdown
+        this.seconds = this.timer.getRemaining() / 1000;
+        this.timeShow.text = Math.ceil(this.seconds);
+  
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
         }

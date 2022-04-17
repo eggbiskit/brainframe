@@ -44,8 +44,8 @@ class Difficulty extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
         // EXPERT MODE <-
             game.settings = {
-              spaceshipSpeed: 3,
-              gameTimer: 60000
+              spaceshipSpeed: 4,
+              gameTimer: 45000
             }
             this.sound.play('sfx_select');
             this.scene.start('tutorialScene');    
@@ -53,8 +53,8 @@ class Difficulty extends Phaser.Scene {
         // N00B MODE ->
         if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
             game.settings = {
-              spaceshipSpeed: 4,
-              gameTimer: 45000    
+              spaceshipSpeed: 3,
+              gameTimer: 60000    
             }
             this.sound.play('sfx_select');
             this.scene.start('tutorialScene');
