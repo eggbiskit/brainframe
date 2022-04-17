@@ -11,6 +11,30 @@ class Rocket extends Phaser.GameObjects.Sprite {
       this.sfxRocket = scene.sound.add('sfx_rocket'); // add rocket sfx
     }
 
+    preload() {
+        this.load.spritesheet('internalscreaming', './assets/internalscreaming_sheet.png', {frameWidth: 117, frameHeight: 100, startFrame: 0, endFrame: 1});
+
+    }
+
+    create() {
+        var config1 = {
+            key: "internalscreamingAnimation",
+            frames: this.anims.generateFrameNumbers("internalscreaming", {
+                start: 0,
+                end: 1,
+                first: 0
+            }),
+            frameRate: 6,
+            repeat: -1
+        };
+        this.anims.create(config);
+        // this.anims.create(config2);
+        var internal_var = this.add.sprite(0, 0, "internalscreaming").play("internalscreamingAnimation");
+        // var uwu_var = this.add.sprite(0, 0, "uwu").play("uwuAnimation");
+        internal_var.play("internalscreamingAnimation");
+        // uwu_var.play("uwuAnimation");
+    }
+
     update() {
         if(!this.isFiring) { // NEW: A and D to move P1
             // if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
